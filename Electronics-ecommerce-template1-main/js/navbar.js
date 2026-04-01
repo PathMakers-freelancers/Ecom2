@@ -201,6 +201,22 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initial check
         window.updateSidebarPosition();
 
+        // Ensure sidebar starts hidden on mobile/tablet (<= 1024)
+        const syncSidebarHiddenState = () => {
+            const isRTL = document.documentElement.getAttribute('dir') === 'rtl' || document.documentElement.classList.contains('rtl');
+            const hiddenClass = isRTL ? 'translate-x-full' : '-translate-x-full';
+
+            if (window.innerWidth < 1024) {
+                sidebar.classList.remove('-translate-x-full', 'translate-x-full');
+                sidebar.classList.add(hiddenClass);
+            } else {
+                sidebar.classList.remove('-translate-x-full', 'translate-x-full');
+            }
+        };
+
+        syncSidebarHiddenState();
+        window.addEventListener('resize', syncSidebarHiddenState);
+
         sidebarToggles.forEach(toggle => {
             toggle.addEventListener('click', (e) => {
                 e.stopPropagation();
