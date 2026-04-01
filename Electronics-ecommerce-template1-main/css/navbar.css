@@ -1,0 +1,261 @@
+/* ===== GLOBAL TEXT COLOR OVERRIDES ===== */
+.text-slate-400,
+.text-slate-500,
+.text-gray-500,
+.text-gray-600,
+.text-slate-700 {
+    color: #0369A1;
+}
+
+.text-slate-900,
+.text-gray-900,
+.text-black {
+    color: #000000;
+}
+
+/* ===== NAVBAR TOGGLE BUTTONS - always clearly visible ===== */
+#rtl-toggle,
+#theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#rtl-toggle svg,
+#theme-toggle svg {
+    color: #111827 !important;
+    stroke: #111827 !important;
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.dark #rtl-toggle svg,
+.dark #theme-toggle svg {
+    color: #FFFFFF !important;
+    stroke: #FFFFFF !important;
+}
+
+/* ===== ACTIVE NAV UNDERLINE ===== */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #4f46e5;
+    transition: width 0.3s ease;
+}
+
+.dark .nav-link::after {
+    background-color: #818cf8;
+}
+
+.nav-link.active-nav-link::after {
+    width: 100%;
+}
+
+/* Keep branding clean: no underline below the logo + brand link */
+.nav-glow > div > a.nav-link::after,
+.nav-glow > div > a.active-nav-link::after {
+    display: none;
+    width: 0;
+}
+
+/* ===== NAVBAR GLOW EFFECT ===== */
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.nav-glow {
+    position: fixed;
+    border: 2px solid transparent;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)) padding-box,
+        conic-gradient(from var(--gradient-angle), transparent 20%, #6366f1 40%, #ec4899 60%, transparent 80%) border-box;
+    animation: spin-border 4s linear infinite;
+    background-clip: padding-box, border-box;
+}
+
+.dark .nav-glow {
+    background:
+        linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.8)) padding-box,
+        conic-gradient(from var(--gradient-angle), transparent 20%, #6366f1 40%, #0ea5e9 60%, transparent 80%) border-box;
+}
+
+@keyframes spin-border {
+    to {
+        --gradient-angle: 360deg;
+    }
+}
+
+/* Navbar pill shape */
+.nav-glow {
+    border-radius: 9999px !important;
+}
+
+/* ===== MOBILE MENU ===== */
+.mobile-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 115;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.mobile-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    z-index: 115 !important;
+}
+
+.mobile-menu-drawer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 20rem;
+    max-width: 80%;
+    background-color: white;
+    z-index: 120 !important;
+    transition: transform 0.3s ease-in-out;
+    left: 0;
+    right: auto;
+    transform: translateX(-100%);
+    overflow-y: auto;
+    max-height: 100dvh;
+}
+
+.mobile-menu-drawer.open {
+    transform: translateX(0);
+}
+
+.dark .mobile-menu-drawer {
+    background-color: #020617;
+}
+
+[dir="rtl"] .mobile-menu-drawer {
+    left: auto;
+    right: 0;
+    transform: translateX(100%);
+}
+
+[dir="rtl"] .mobile-menu-drawer.open {
+    transform: translateX(0) !important;
+}
+
+/* ===== DROPDOWN MENUS ===== */
+.nav-dropdown-menu {
+    border-radius: 1.5rem !important;
+    transform-origin: top;
+    transition: all 0.2s ease-out;
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+    display: block !important;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.nav-dropdown-menu.active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.nav-dropdown-trigger i {
+    transition: transform 0.3s ease;
+}
+
+.nav-dropdown-trigger[aria-expanded="true"] i {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown-menu a {
+    color: #000000;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.dark .nav-dropdown-menu a {
+    color: #FFFFFF;
+}
+
+.nav-dropdown-menu a:hover {
+    background-color: #F8FAFC;
+    color: #4F46E5;
+    padding-left: 1.25rem;
+}
+
+.dark .nav-dropdown-menu a:hover {
+    background-color: #1E293B;
+    color: #818CF8;
+}
+
+/* ===== FLASH PRELOADER ===== */
+#flash-preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease;
+}
+
+.dark #flash-preloader {
+    background-color: #020617;
+}
+
+#flash-preloader.opacity-0 {
+    opacity: 0;
+    pointer-events: none;
+}
+/* ===== 1024px NAVBAR COMPACT: prevent pill link overflow ===== */
+@media (min-width: 1024px) and (max-width: 1200px) {
+    /* Compact the nav pill link padding and text */
+    nav .nav-dropdown-trigger,
+    nav > div > div > a {
+        padding-left: 0.65rem !important;
+        padding-right: 0.65rem !important;
+        font-size: 0.75rem !important;
+    }
+    /* Compact auth buttons */
+    nav a[href="login.html"],
+    nav a[href="signup.html"] {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+        font-size: 0.75rem !important;
+    }
+}
+/* ===== THEME TOGGLE: Show/Hide Moon vs Sun ===== */
+#theme-toggle .moon-wrapper {
+    display: block !important;
+}
+#theme-toggle .sun-wrapper {
+    display: none !important;
+}
+
+html.dark #theme-toggle .moon-wrapper {
+    display: none !important;
+}
+html.dark #theme-toggle .sun-wrapper {
+    display: block !important;
+}
+
+/* Force Icon Colors */
+#theme-toggle .moon-wrapper svg {
+    color: #000000 !important;
+    stroke: #000000 !important;
+}
+html.dark #theme-toggle .sun-wrapper svg {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+}

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In - ElectraHub</title>
+    <link rel="icon" href="logo.svg" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+
+        .dark body {
+            background: #020617;
+        }
+
+        #auth-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            text-decoration: none;
+        }
+
+        .auth-logo-icon {
+            width: 44px;
+            height: 44px;
+            background: #6366f1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 8px 20px rgba(99,102,241,0.3);
+        }
+
+        .auth-logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .dark .auth-logo-text {
+            color: #fff;
+        }
+
+        #auth-box {
+            width: 100%;
+            max-width: 820px;
+            background: #fff;
+            border-radius: 28px;
+            box-shadow: 0 25px 60px -12px rgba(99, 102, 241, 0.18);
+            overflow: hidden;
+            display: flex;
+            min-height: 520px;
+        }
+
+        .dark #auth-box {
+            background: #0f172a;
+        }
+
+        .auth-form-side {
+            width: 50%;
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .dark .auth-form-side {
+            background: #0f172a;
+        }
+
+        .auth-social-side {
+            width: 50%;
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-social-side::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('Assets/Ecosystem.jpeg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+        }
+
+        .auth-heading {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 40px;
+            line-height: 1.1;
+            color: #0f172a;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .dark .auth-heading {
+            color: #fff;
+        }
+
+        .auth-subtext {
+            font-size: 14px;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 6px;
+        }
+
+        .dark .input-label {
+            color: #94a3b8;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            height: 50px;
+            padding: 12px 16px;
+            background: #f1f5f9;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            color: #1e293b;
+            box-sizing: border-box;
+        }
+
+        .dark input[type="text"],
+        .dark input[type="email"],
+        .dark input[type="password"] {
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #6366f1;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .dark input:focus {
+            background: #0f172a;
+        }
+
+        .forgot-link {
+            font-size: 13px;
+            color: #6366f1;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: right;
+            display: block;
+            margin-top: 6px;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            height: 50px;
+            background: #6366f1;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 16px;
+        }
+
+        .submit-btn:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -3px rgba(99, 102, 241, 0.4);
+        }
+
+        .switch-text {
+            font-size: 13px;
+            color: #64748b;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .switch-link {
+            color: #6366f1;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .switch-link:hover {
+            text-decoration: underline;
+        }
+
+        .social-btn {
+            width: 100%;
+            height: 46px;
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        .facebook { background: #1877f2; }
+        .twitter { background: #1da1f2; }
+        .google { background: #ea4335; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        @media (max-width: 768px) {
+            #auth-box {
+                flex-direction: column;
+                max-width: 420px;
+            }
+
+            .auth-form-side,
+            .auth-social-side {
+                width: 100%;
+                padding: 36px 28px 48px 28px;
+                order: unset;
+            }
+
+            .auth-form-side {
+                order: -1;
+            }
+
+            .auth-heading {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body class="transition-colors duration-300">
+
+    <div id="auth-page">
+        <!-- Clickable Logo -->
+        <a href="index.html" class="auth-logo">
+            <div class="auth-logo-icon">
+                <i data-lucide="plug" style="width:22px;height:22px;"></i>
+            </div>
+            <span class="auth-logo-text">ElectraHub</span>
+        </a>
+
+        <div id="auth-box">
+            <!-- Form Side -->
+            <div class="auth-form-side" style="position:relative;">
+                <h1 class="auth-heading">Welcome Back</h1>
+                <p class="auth-subtext">Sign in to your ElectraHub account</p>
+
+                <div class="input-group">
+                    <label class="input-label">Email Address</label>
+                    <input type="email" placeholder="you@example.com" />
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Password</label>
+                    <input type="password" placeholder="Enter your password" />
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <button class="submit-btn">Log In</button>
+
+                <p class="switch-text">
+                    Don't have an account?
+                    <a href="signup.html" class="switch-link">Sign Up</a>
+                </p>
+
+            </div>
+
+            <!-- Social Side -->
+            <div class="auth-social-side">
+                <div style="position:relative;z-index:10;">
+                    <span style="display:block;font-size:22px;font-weight:800;margin-bottom:8px;">Connect with social</span>
+                    <span style="display:block;font-size:13px;opacity:0.8;margin-bottom:32px;">Sign in faster with your social account</span>
+
+                    <button class="social-btn facebook">
+                        <i data-lucide="facebook" style="width:18px;height:18px;"></i> Login with Facebook
+                    </button>
+                    <button class="social-btn twitter">
+                        <i data-lucide="twitter" style="width:18px;height:18px;"></i> Login with Twitter
+                    </button>
+                    <button class="social-btn google">
+                        <i data-lucide="chrome" style="width:18px;height:18px;"></i> Login with Google
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>
